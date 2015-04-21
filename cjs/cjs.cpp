@@ -10,13 +10,13 @@ using namespace cjs;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	jsrt::runtime runtime = jsrt::runtime::create();
+	jsrt::runtime runtime = jsrt::runtime::create(JsRuntimeAttributeNone, JsRuntimeVersionEdge);
 	auto context = runtime.create_context();
 
 	{
 		jsrt::context::scope scope(context);
 
-		// parse a line of javascript and return true if it's valid
+		// parse some javascript and return true if it's valid
 		auto lineChecker = [](wstring input) -> bool {
 			try {
 				auto code = jsrt::context::parse(input);
@@ -27,7 +27,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 		};
 
-		// run a line a javascript
+		// run some javascript
 		auto eval = [](wstring input) -> wstring {
 			try {
 				return jsrt::string::convert(

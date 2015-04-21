@@ -29,13 +29,15 @@ namespace cjs {
 					wstring line;
 					getline(wcin, line);
 					inputs << line << endl;
-					if (lineChecker(inputs.str()))
+					if (repl::s_done || lineChecker(inputs.str()))
 						break;
 					wcout << L"... ";
 				}
 
 				// run the input script
-				wcout << eval(inputs.str()) << endl << endl;
+				if (!repl::s_done) {
+					wcout << eval(inputs.str()) << endl << endl;
+				}
 			}
 
 			return 0;
